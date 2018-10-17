@@ -171,16 +171,318 @@ document.getElementById('btn-calcular-2').addEventListener('click', () => {
       document.getElementById('listNotas2').appendChild(ultimaNota2);
 
       document.getElementById('mediaPonderada').innerHTML = mediaPonderada;
+    }
+    return;
+  }
+});
 
 
 
+// ---------------App4---------------
+var barraNovia = 100, barraAmigo = 100, barraFamilia = 100;
+
+document.getElementById('embarradas').addEventListener('click', function() {
+
+  var size = document.getElementById('size').value;
+  var persona =document.getElementById('persona').value;
+
+  function tamano(tamano) {
+      var barra;
+      switch (tamano) {
+        case 'pequena':
+            barra =  -10;
+        break;
+        case 'mediana':
+            barra = -20;
+        break;
+        case' grande':
+            barra = -40;
+        break;
+      }
+      return barra;
+    }
+  function tolerancia(barra, quien) {
+    document.getElementById('bienNovia').style.background = 'none';
+    document.getElementById('regularNovia').style.background = 'none';
+    document.getElementById('malNovia').style.background = 'none';
+    document.getElementById('bienFamilia').style.background = 'none';
+    document.getElementById('regularFamilia').style.background = 'none';
+    document.getElementById('malFamilia').style.background = 'none';
+    document.getElementById('bienAmigo').style.background = 'none';
+    document.getElementById('regularAmigo').style.background = 'none';
+    document.getElementById('malAmigo').style.background = 'none';
+
+
+    if (barra > 70 && quien == 'novia') {
+      document.getElementById('bienNovia').style.background = '#4BB543';
+    }else if (barra <= 70 && barra >= 40 && quien == 'novia') {
+      document.getElementById('regularNovia').style.background = '#e2c044';
+    }else if (barra < 40 && quien == 'novia') {
+      document.getElementById('malNovia').style.background = '#b6372b';
     }
 
+    if (barra > 70 && quien == 'familia') {
+      document.getElementById('bienFamilia').style.background = '#4BB543';
+    }else if (barra <= 70 && barra >= 40 && quien == 'familia') {
+      document.getElementById('regularFamilia').style.background = '#e2c044';
+    }else if (barra < 40 && quien == 'familia') {
+      document.getElementById('malFamilia').style.background = '#b6372b';
+    }
+
+    if (barra > 70 && quien == 'amigo') {
+      document.getElementById('bienAmigo').style.background = '#4BB543';
+    }else if (barra <= 70 && barra >= 40 && quien == 'amigo') {
+      document.getElementById('regularAmigo').style.background = '#e2c044';
+    }else if (barra < 40 && quien == 'amigo') {
+      document.getElementById('malAmigo').style.background = '#b6372b';
+    }
+
+  }
+
+  switch (persona) {
+    case 'novia':
+      barraNovia = barraNovia + tamano(size);
+      tolerancia(barraNovia, persona);
+      if (barraNovia < 0 ) {
+        barraNovia = 100;
+      }
+      break;
+    case 'familia':
+      barraFamilia = barraFamilia + tamano(size);
+      tolerancia(barraFamilia, persona);
+      if (barraFamilia < 0) {
+        barraFamilia = 100;
+      }
+      break;
+    case 'amigo':
+      barraAmigo = barraAmigo + tamano(size);
+      tolerancia(barraAmigo, persona);
+      if (barraAmigo < 0) {
+        barraAmigo = 100;
+      }
+      break;
+  }
+
+})
 
 
-    return;
+
+
+
+// ----------------App 5----------------
+var contador = 0, edades = [],edad, edadMayor = 0,edadMenor = 0;
+
+document.getElementById('anadirEdad').addEventListener('click', function() {
+  edad = document.getElementById('input-edades').value;
+
+  if (edad == '' || parseInt(edad) <= 0) {
+    alert('Porfavor introduzca una edad valida');
+  }else {
+    edad = parseInt(edad)
+    edades.push(edad);
+    contador++;
+
+    edadElemento = document.createElement('li');
+    edadContenido = document.createTextNode('Edad '+ contador + ': '+ edad);
+    edadElemento.appendChild(edadContenido);
+    document.getElementById('listEdades').appendChild(edadElemento);
+
+    for (var i = 0; i < edades.length; i++) {
+      if(edad > edades[i] && edad > edadMayor){
+        edadMayor = edad;
+      }else if (edades.length == 1) {
+        edadMayor = edad;
+      }
+    }
+    for (var i = 0; i < edades.length; i++) {
+      if(edad < edades[i] && edad < edadMenor){
+        edadMenor = edad;
+      }else if (edades.length == 1) {
+        edadMenor = edad;
+      }
+    }
+    document.getElementById('edadMayor').innerHTML = edadMayor;
+    document.getElementById('edadMenor').innerHTML = edadMenor;
   }
 
 
 
+
+
+
+
+
 });
+
+
+
+//----------------- App 6-----------------
+var balance = 0, sumaGastos = 0;
+var sumaGasto = [0,0,0,0],resultadoPonderado = [0,0,0,0] ;
+
+
+document.getElementById('btn-gastos').addEventListener('click', function() {
+  // ----------------Validacion----------------
+  var monto = document.getElementById('inputMonto').value;
+  var categoria = document.getElementById('categoria').value;
+
+  if (monto == '' || parseFloat(monto) < 1) {
+    alert('Ingrese un monto Valido');
+  }else {
+    monto = parseFloat(monto);
+
+//---------------Proyectar Balance---------------
+    if (categoria != 'ingreso') {
+      balance -= monto;
+    }else if (categoria === 'ingreso') {
+      balance += monto;
+    }
+    document.getElementById('balance').innerHTML = balance;
+//---------------Proyectar ultimos gastos---------------
+
+    var ultimoGasto = document.createElement('li');
+    var ultimoGastoContenido = document.createTextNode(categoria + ' ' + monto + ' $')
+    ultimoGasto.appendChild(ultimoGastoContenido);
+    document.getElementById('listGastos').appendChild(ultimoGasto);
+//-----------------------alcular En que gasta-----------------------
+
+    if (categoria != 'ingreso') {
+      sumaGastos += monto;
+    }
+
+
+    function enQueGasto(puesto) {
+      var resultadoGasto = 0;
+      sumaGasto[puesto] += monto;
+      resultadoPonderado[puesto] = (sumaGasto[puesto]*100)/sumaGastos;
+      for(var i in resultadoPonderado){
+        resultadoPonderado[i] = (sumaGasto[i]*100)/sumaGastos;
+      }
+      return parseFloat(resultadoPonderado[puesto]);
+    }
+
+    function refresh() {
+      document.getElementById('comida').innerHTML = resultadoPonderado[0]+ ' %';
+      document.getElementById('transporte').innerHTML = resultadoPonderado[1]+ ' %';
+      document.getElementById('diversion').innerHTML = resultadoPonderado[2]+ ' %';
+      document.getElementById('facturas').innerHTML = resultadoPonderado[3]+ ' %';
+    }
+
+    if (categoria == 'comida') {
+      document.getElementById('comida').innerHTML = enQueGasto(0) + ' %';
+      refresh();
+    }
+    if (categoria == 'transporte') {
+      document.getElementById('transporte').innerHTML = enQueGasto(1) + ' %';
+      refresh();
+    }
+    if (categoria == 'diversion') {
+      document.getElementById('diversion').innerHTML = enQueGasto(2) + ' %';
+      refresh();
+    }
+    if (categoria == 'facturas') {
+      document.getElementById('facturas').innerHTML = enQueGasto(3) + ' %';
+      refresh();
+    }
+
+  }
+
+});
+
+//--------------------------------- app7---------------------------------
+var contadorbd= 0, ccs=[],nombres =[], apellidos=[], emails=[], telefonos= [], i;
+
+
+
+//-----------------------nadiendo persona-----------------------
+document.getElementById('guardarPersona').addEventListener('click', function(e) {
+
+  var cc = document.getElementById('cc').value;
+  var nombre = document.getElementById('nombre').value.toUpperCase();
+  var apellido = document.getElementById('apellido').value.toUpperCase();
+  var email = document.getElementById('email').value.toLowerCase();
+  var telefono = document.getElementById('telefono').value;
+
+
+  if (cc == '' || parseInt(cc) <= 0 ) {
+      alert('Porfavor introduzca un cedula valida')
+
+  }else if (nombre == '') {
+    alert('Porfavor introduzca un nombre');
+  }else if (apellido == '') {
+    alert('Porfavor introduzca un apellido');
+  }else if (telefono.length != 10) {
+    alert('Porfavor introduzca un celular valido');
+
+  }
+  function validar(cc) {
+     for (var i = 0; i < ccs.length; i++) {
+       if(parseInt(cc) == ccs[i]){
+         alert('Porfavor introduzca un cedula valida y/o unica');
+         return false;
+       }else {
+         return true;
+       }
+     }
+
+   }
+  if (validar(cc) != false){
+    ccs[contadorbd] = parseInt(cc);
+    nombres[contadorbd] = nombre;
+    apellidos[contadorbd] = apellido;
+    emails[contadorbd] = email;
+    telefonos[contadorbd] = telefono;
+    contadorbd++;
+
+  }
+
+
+});
+
+document.getElementById('btn-busqueda').addEventListener('click', function() {
+
+  var ccBuscar = document.getElementById('cc-buscar').value;
+  var nombreBuscar = document.getElementById('nombre-buscar').value;
+  function buscarcc(cc) {
+    for (var i = 0; i < ccs.length; i++) {
+     if (parseInt(cc) === ccs[i]) {
+       return i;
+     }
+    }
+  }
+  function buscarNombre(nombre) {
+    for (var i = 0; i < ccs.length; i++) {
+     if (nombre.toUpperCase() === nombres[i]) {
+       return i;
+     }
+    }
+  }
+
+
+
+
+
+  if (ccBuscar == '' && nombreBuscar == '') {
+    alert('Ingrese al menos un campo para la busqueda');
+  }else if (ccBuscar != '') {
+    var indice =buscarcc(ccBuscar)
+    document.getElementById('cc-proyectar').innerHTML = ccs[indice];
+    document.getElementById('nombre-proyectar').innerHTML = nombres[indice];
+    document.getElementById('apellido-proyectar').innerHTML = apellidos[indice];
+    document.getElementById('email-proyectar').innerHTML = emails[indice];
+    document.getElementById('telefono-proyectar').innerHTML = telefonos[indice];
+
+  console.log(buscarcc(ccBuscar));
+  }else if (nombreBuscar != '') {
+    var indice2 = buscarNombre(nombreBuscar);
+    console.log(buscarNombre(nombreBuscar));
+    document.getElementById('cc-proyectar').innerHTML = ccs[indice2];
+    document.getElementById('nombre-proyectar').innerHTML = nombres[indice2];
+    document.getElementById('apellido-proyectar').innerHTML = apellidos[indice2];
+    document.getElementById('email-proyectar').innerHTML = emails[indice2];
+    document.getElementById('telefono-proyectar').innerHTML = telefonos[indice2];
+
+  console.log(buscarcc(ccBuscar));
+  }
+
+});;

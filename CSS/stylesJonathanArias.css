@@ -444,6 +444,9 @@ nav{
 .flex-alignSelf-center{
   align-self: center;
 }
+.flex-alignItems-center{
+  align-items: center;
+}
 
 /* div */
 
