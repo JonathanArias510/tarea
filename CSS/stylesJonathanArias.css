@@ -70,8 +70,8 @@ select{
   display: block;
   padding: 1.25rem;
   text-decoration: none;
-  border-bottom: 1px solid rgb(211, 208, 203,.7);
-  margin: 0 0.625rem;;
+  border-bottom: 1px solid rgb(211, 208, 203,0.5);
+  margin: 0 0.625rem;
 
 }
 .menu-item:hover{
