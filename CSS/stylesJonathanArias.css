@@ -70,12 +70,12 @@ select{
   display: block;
   padding: 1.25rem;
   text-decoration: none;
-  border-bottom: 1px solid rgb(211, 208, 203,0.5);
+  border-bottom: 1px solid rgb(211, 208, 203,);
   margin: 0 0.625rem;
 
 }
 .menu-item:hover{
-  background: rgba(210,207,202,.96);
+  background: rgba(210,207,202,.5);
 }
 nav{
   display: none;
