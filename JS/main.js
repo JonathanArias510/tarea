@@ -443,46 +443,50 @@ document.getElementById('btn-busqueda').addEventListener('click', function() {
 
   var ccBuscar = document.getElementById('cc-buscar').value;
   var nombreBuscar = document.getElementById('nombre-buscar').value;
-  function buscarcc(cc) {
+
+  function buscarCc(cc) {
     for (var i = 0; i < ccs.length; i++) {
      if (parseInt(cc) === ccs[i]) {
        return i;
+     }else {
+       return alert('No encontrado');;
      }
     }
   }
+
   function buscarNombre(nombre) {
     for (var i = 0; i < ccs.length; i++) {
      if (nombre.toUpperCase() === nombres[i]) {
        return i;
+     }else {
+       return alert('No encontrado');;
      }
     }
   }
 
-
+  function proyectarResultados(i) {
+    document.getElementById('cc-proyectar').innerHTML = ccs[i];
+    document.getElementById('nombre-proyectar').innerHTML = nombres[i];
+    document.getElementById('apellido-proyectar').innerHTML = apellidos[i];
+    document.getElementById('email-proyectar').innerHTML = emails[i];
+    document.getElementById('telefono-proyectar').innerHTML = telefonos[i];
+  }
 
 
 
   if (ccBuscar == '' && nombreBuscar == '') {
     alert('Ingrese al menos un campo para la busqueda');
+
   }else if (ccBuscar != '') {
-    var indice =buscarcc(ccBuscar)
-    document.getElementById('cc-proyectar').innerHTML = ccs[indice];
-    document.getElementById('nombre-proyectar').innerHTML = nombres[indice];
-    document.getElementById('apellido-proyectar').innerHTML = apellidos[indice];
-    document.getElementById('email-proyectar').innerHTML = emails[indice];
-    document.getElementById('telefono-proyectar').innerHTML = telefonos[indice];
 
-  console.log(buscarcc(ccBuscar));
+    proyectarResultados(buscarCc(ccBuscar));
+
+
   }else if (nombreBuscar != '') {
-    var indice2 = buscarNombre(nombreBuscar);
-    console.log(buscarNombre(nombreBuscar));
-    document.getElementById('cc-proyectar').innerHTML = ccs[indice2];
-    document.getElementById('nombre-proyectar').innerHTML = nombres[indice2];
-    document.getElementById('apellido-proyectar').innerHTML = apellidos[indice2];
-    document.getElementById('email-proyectar').innerHTML = emails[indice2];
-    document.getElementById('telefono-proyectar').innerHTML = telefonos[indice2];
 
-  console.log(buscarcc(ccBuscar));
+
+    proyectarResultados(buscarNombre(nombreBuscar));
+
   }
 
 });;
