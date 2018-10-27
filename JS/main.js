@@ -452,20 +452,21 @@ document.getElementById('btn-busqueda').addEventListener('click', function() {
   function buscarCc(cc) {
 
     for (var i = 0; i < ccs.length; i++) {
-     if (parseInt(cc) === ccs[i]) {
+     if (parseInt(cc) == ccs[i]) {
 
        return i ;
      }else {
 
-       return alert('No encontrado') ;
-     }
+       return alert('No encontrado');
+
+      }
     }
   }
 
   function buscarNombre(nombre) {
 
     for (var i = 0; i < ccs.length; i++) {
-     if (nombre.toUpperCase() === nombres[i]) {
+     if (nombre.toUpperCase() === nombres[i].toUpperCase()) {
 
        return i;
      }else {
@@ -483,7 +484,6 @@ document.getElementById('btn-busqueda').addEventListener('click', function() {
       document.getElementById('apellido-proyectar').innerHTML = apellidos[i];
       document.getElementById('email-proyectar').innerHTML = emails[i];
       document.getElementById('telefono-proyectar').innerHTML = telefonos[i];
-
 
   }
 
