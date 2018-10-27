@@ -457,7 +457,7 @@ document.getElementById('btn-busqueda').addEventListener('click', function() {
        return i ;
      }else {
 
-       return alert('No encontrado'), ;
+       return alert('No encontrado') ;
      }
     }
   }
