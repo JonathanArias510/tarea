@@ -53,7 +53,7 @@ var contadorApp = 1;
 
 document.getElementById('btn-contar').addEventListener('click', () => {
   contadorApp++;
-  if (contador == 13) {
+  if (contadorApp == 13) {
     contadorApp = 1;
     document.getElementById('out-contador').innerHTML = 'Feliz año';
   }else {
