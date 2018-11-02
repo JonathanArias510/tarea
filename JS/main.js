@@ -49,15 +49,15 @@ $(document).ready(() => {
 
 //---------------App 1---------------
 
-var contador = 1;
+var contadorApp = 1;
 
 document.getElementById('btn-contar').addEventListener('click', () => {
-  contador++;
+  contadorApp++;
   if (contador == 13) {
-    contador = 1;
+    contadorApp = 1;
     document.getElementById('out-contador').innerHTML = 'Feliz año';
   }else {
-    document.getElementById('out-contador').innerHTML = contador;
+    document.getElementById('out-contador').innerHTML = contadorApp;
   }
 });
 
@@ -68,7 +68,7 @@ document.getElementById('btn-contar').addEventListener('click', () => {
 var inputsNotas = document.getElementById('inputsNotas');
 var inputsRangos = document.getElementById('inputsRangos');
 
-var rangoMayor, rangoMenor, nota, contador = 0, sumaNotas= 0, promedio = 0;
+var rangoMayor, rangoMenor, nota, AppEdades = 0, sumaNotas= 0, promedio = 0;
 
 document.getElementById('btn-calcular').addEventListener('click', () => {
 
@@ -100,12 +100,12 @@ document.getElementById('btn-calcular').addEventListener('click', () => {
     if (nota == '' || parseFloat(nota) > rangoMayor || parseFloat(nota) < rangoMenor) {
       alert('Recuerde los parametros anteriores O el campo esta vacio');
     }else {
-      contador++;
+      contadorAppNotas1++;
       sumaNotas += parseFloat(nota);
-      promedio = sumaNotas/contador;
+      promedio = sumaNotas/contadorAppNotas1;
 
       var ultimaNota = document.createElement('li');
-      var ultimaNotaContenido = document.createTextNode('Nota' + contador + ':  ' + nota + ' PTS' )
+      var ultimaNotaContenido = document.createTextNode('Nota' + contadorAppNotas1 + ':  ' + nota + ' PTS' )
       ultimaNota.appendChild(ultimaNotaContenido);
       document.getElementById('listNotas1').appendChild(ultimaNota);
       document.getElementById('promedio').innerHTML = promedio;
@@ -270,7 +270,7 @@ document.getElementById('embarradas').addEventListener('click', function() {
 
 
 // ----------------App 5----------------
-var contador = 0, edades = [],edad, edadMayor = 0,edadMenor = 0;
+var contadorAppEdades = 0, edades = [],edad, edadMayor = 0,edadMenor = 0;
 
 document.getElementById('anadirEdad').addEventListener('click', function() {
   edad = document.getElementById('input-edades').value;
@@ -280,10 +280,10 @@ document.getElementById('anadirEdad').addEventListener('click', function() {
   }else {
     edad = parseInt(edad)
     edades.push(edad);
-    contador++;
+    contadorAppEdades++;
 
     edadElemento = document.createElement('li');
-    edadContenido = document.createTextNode('Edad '+ contador + ': '+ edad);
+    edadContenido = document.createTextNode('Edad '+ contadorAppEdades + ': '+ edad);
     edadElemento.appendChild(edadContenido);
     document.getElementById('listEdades').appendChild(edadElemento);
 
