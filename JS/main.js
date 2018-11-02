@@ -68,7 +68,7 @@ document.getElementById('btn-contar').addEventListener('click', () => {
 var inputsNotas = document.getElementById('inputsNotas');
 var inputsRangos = document.getElementById('inputsRangos');
 
-var rangoMayor, rangoMenor, nota, AppEdades = 0, sumaNotas= 0, promedio = 0;
+var rangoMayor, rangoMenor, nota, AppEdades = 0, sumaNotas= 0, promedio = 0, contadorAppNotas1 = 0;
 
 document.getElementById('btn-calcular').addEventListener('click', () => {
 
